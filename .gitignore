@@ -1,0 +1,70 @@
+# .gitignore for Feasto React Project
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# production
+/build
+
+# misc
+.DS_Store
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# log files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# editor directories and files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# OS generated files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Tailwind JIT cache
+/.tailwindcss-cache
+
+# Optional: ignore local test snapshots
+/src/components/__tests__/*.snap
+
+# Optional: ignore local build artifacts
+*.log
+
+# Optional: ignore Mac system files
+.AppleDouble
+.LSOverride
+
+# Optional: ignore Windows system files
+$RECYCLE.BIN/
+
+# Optional: ignore coverage reports
+coverage/
+
+# Optional: ignore parcel cache
+.cache/
+
+# Optional: ignore storybook build
+out/
+storybook-static/
+
+# Optional: ignore npm package lock
+package-lock.json
+yarn.lock
+pnpm-lock.yaml

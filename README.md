@@ -109,7 +109,7 @@ MY-FOOD-APP/
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/yourusername/feasto.git
+git clone https://github.com/dhirajharane/feasto.git
 cd feasto
 
 # 2. Install dependencies

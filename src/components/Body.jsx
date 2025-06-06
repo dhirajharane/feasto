@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import useOnlineStatus from "../assets/useOnlineStatus";
 import { useDispatch, useSelector } from "react-redux";
 import { addRestaurants, filterTopRated, resetFilter } from "../assets/restaurantsSlice";
-import { ALL_RESTAURANTS_API } from "../assets/constants";
+import { SWIGGY_ALL_RESTAURANTS } from "../assets/constants";
 
 const Body = () => {
   const dispatch = useDispatch();
@@ -22,9 +22,8 @@ const Body = () => {
   }, []);
 
   const fetchData = async () => {
-    const data = await fetch(
-      `${ALL_RESTAURANTS_API}`
-    );
+    const proxyUrl = "/api/swiggy?url=" + encodeURIComponent(SWIGGY_ALL_RESTAURANTS);
+    const data = await fetch(proxyUrl);
     const json = await data.json();
     const properData =
       json?.data?.cards?.[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants || [];

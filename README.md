@@ -109,7 +109,7 @@ MY-FOOD-APP/
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/yourusername/feasto.git
+git clone https://github.com/dhirajharane/feasto.git
 cd feasto
 
 # 2. Install dependencies
@@ -120,9 +120,13 @@ npm start
 
 # App runs on:
 http://localhost:3000
+
 ```
+<br>
+💡 Tip: To avoid CORS errors when running this project locally, use the Chrome extension "Allow CORS". Without it, the app might not function properly.
 
 ---
+
 
 ## 🧪 Running Tests
 

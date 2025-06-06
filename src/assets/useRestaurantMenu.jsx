@@ -7,7 +7,12 @@ const useRestaurantMenu = (resId) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await fetch(`${MENU_API}${resId}`);
+        // Decode the base Swiggy URL from MENU_API, append resId, then encode again for the proxy
+        const baseUrl = decodeURIComponent(MENU_API);
+        const fullSwiggyUrl = baseUrl + resId;
+        const proxyUrl = "/api/swiggy?url=" + encodeURIComponent(fullSwiggyUrl);
+
+        const data = await fetch(proxyUrl);
         const json = await data.json();
         setResInfo(json);
       } catch (error) {

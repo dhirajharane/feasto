@@ -6,22 +6,35 @@ const RestaurantCard = ({ resData }) => {
     resData.info;
 
   return (
-    <div className="bg-white rounded-2xl shadow-lg border border-gray-200 w-68 h-93 m-8 flex flex-col overflow-hidden transform transition-transform duration-200 hover:scale-105 hover:shadow-2xl hover:border-pink-400 hover:z-10 group">
+    <div
+      className="bg-white rounded-2xl shadow-lg border border-gray-200 
+                 w-[30vw] sm:w-68 h-auto sm:h-93 mx-[1vw] my-2 
+                 flex flex-col overflow-hidden transform transition-transform 
+                 duration-200 hover:scale-105 hover:shadow-2xl hover:border-pink-400 hover:z-10 group"
+    >
       <img
         src={CDN_URL + cloudinaryImageId}
         alt={name}
-        className="h-51 w-full object-cover group-hover:brightness-90 transition"
+        className="h-[22vw] sm:h-51 w-full object-cover group-hover:brightness-90 transition"
       />
-      <div className="p-4 flex flex-col gap-2 flex-1">
-        <h3 className="text-lg font-bold text-gray-800">{name}</h3>
-        <p className="text-gray-500 text-xs truncate">{cuisines.join(", ")}</p>
-        <div className="flex items-center justify-between mt-2">
-          <span className="bg-green-100 text-green-700 px-2 py-1 rounded-lg font-semibold text-xs">
+      <div className="px-3 py-2 flex flex-col gap-1 sm:gap-2 flex-1">
+        <h3 className="text-[10px] sm:text-lg font-bold  text-gray-800 truncate">
+          {name}
+        </h3>
+        <p className="text-gray-500 text-[9px] sm:text-xs truncate">
+          {cuisines.join(", ")}
+        </p>
+        <div className="flex items-center justify-between mt-1 sm:mt-2">
+          <span className="bg-green-100 text-green-700 px-1.5 py-0.5 sm:px-2 sm:py-1 rounded-lg font-semibold text-[9px] sm:text-xs">
             ⭐ {avgRating}
           </span>
-          <span className="text-gray-700 text-xs">{costForTwo}</span>
+          <span className="text-gray-700 text-[9px] sm:text-xs">
+            {costForTwo}
+          </span>
         </div>
-        <span className="text-gray-400 text-xs mt-1">{areaName}</span>
+        <span className="text-gray-400 text-[9px] sm:text-xs">
+          {areaName}
+        </span>
       </div>
     </div>
   );

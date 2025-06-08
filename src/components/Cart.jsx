@@ -29,7 +29,7 @@ const Cart = () => {
   const total = subtotal + DELIVERY_CHARGE + gst;
 
   return (
-    <div className="w-full md:w-7/12 mx-auto my-8 bg-white rounded-xl shadow-lg p-6">
+    <div className="w-full md:w-7/12 mx-auto my-8 bg-white rounded-xl shadow-lg p-6 overflow-y-auto">
       <h2 className="text-3xl font-bold mb-6 text-center text-pink-600">🛒 Your Cart</h2>
       {cartItems.length === 0 ? (
         <p className="text-gray-600 text-center text-lg">Your cart is empty.</p>
@@ -64,7 +64,7 @@ const Cart = () => {
               Order Now
             </button>
             <button
-              className="mt-3 w-full py-2 bg-gray-200 text-gray-700 font-semibold rounded-lg hover:bg-gray-300 transition cursor-pointer"
+              className=" mt-3 w-full py-2 bg-gray-200 text-gray-700 font-semibold rounded-lg hover:bg-gray-300 transition cursor-pointer"
               onClick={() => dispatch(clearCart())}
             >
               Clear Cart

@@ -33,10 +33,10 @@ const ItemList = ({ items }) => {
           >
             {/* Left side: title, price, description */}
             <div className="flex flex-col space-y-2 max-w-xl">
-              <span className="block font-semibold text-gray-800 text-lg">
+              <span className="block sm:font-semibold font-medium text-gray-800 sm:text-lg text-sm">
                 {item.card.info.name}
               </span>
-              <span className="text-gray-900 font-semibold text-base">
+              <span className="text-gray-900 sm:font-semibold font-medium sm:text-base text-sm">
                 ₹
                 {Math.round(
                   (item.card.info.defaultPrice ??
@@ -44,27 +44,27 @@ const ItemList = ({ items }) => {
                     0) / 100
                 )}
               </span>
-              <p className="text-gray-600 text-sm leading-relaxed">
+              <p className="text-gray-600 sm:text-sm text-[11px] leading-relaxed">
                 {item.card.info.description}
               </p>
             </div>
             {/* Right side: image box */}
-            <div className="relative w-28 h-24 flex flex-col items-center">
+            <div className="relative sm:w-26 sm:h-24 w-16 h-19 flex flex-col items-center ml-4 sm:ml-0">
               <img
                 src={CDN_URL + item.card.info.imageId}
-                className="w-28 h-24 object-cover rounded-xl border border-gray-200 mb-2"
+                className="w-22 h-24 object-cover rounded-xl border border-gray-200 mb-2"
                 alt={item.card.info.name}
               />
               {isCart ? (
                 <button
-                  className="font-bold -mt-7 bg-white text-red-500 text-sm border border-gray-300 px-4 py-1 rounded-lg cursor-pointer hover:shadow-sm"
+                  className="sm:font-bold font-medium -mt-7 bg-white text-red-500 sm:text-sm text-xs border border-gray-300 sm:px-4 px-3 py-1 rounded-lg cursor-pointer hover:shadow-sm"
                   onClick={() => handleRemoveItem(item)}
                 >
                   Remove
                 </button>
               ) : (
                 <button
-                  className="-mt-6 font-bold bg-green-500 text-white text-sm border border-green-600 px-4 py-1 rounded-lg cursor-pointer hover:bg-green-600 hover:shadow-sm"
+                  className="-mt-6 sm:font-bold font-medium bg-green-500 text-white text-sm border border-green-600 px-4 py-1 rounded-lg cursor-pointer hover:bg-green-600 hover:shadow-sm"
                   onClick={() => handleAddItem(item)}
                 >
                   ADD+

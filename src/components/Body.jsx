@@ -39,7 +39,7 @@ const Body = () => {
     <RestaurantCardsShimmer />
   ) : (
     <div className="body min-h-[80vh] bg-pink-50 py-8">
-      <div className="filter flex items-center flex-wrap sm:ml-4 ml-72 sm:mt-3 -mt-4 mb-6 gap-4">
+      <div className="filter flex items-center flex-wrap sm:ml-4 ml-68 sm:mt-3 -mt-4 mb-6 gap-4">
         <button
           className="filter-btn sm:px-4 sm:py-2 px-2 py-1 bg-pink-200 rounded-lg cursor-pointer hover:bg-pink-300 hover:shadow-md transition duration-200 sm:font-semibold text-xs sm:text-lg font-medium"
           onClick={() => dispatch(filterTopRated())}

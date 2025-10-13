@@ -1,5 +1,5 @@
 import React from "react";
-import Contact from "../Contact"
+import Contact from "../../pages/Contact"
 import { render, screen } from "@testing-library/react"
 import '@testing-library/jest-dom';
 
@@ -15,5 +15,4 @@ test("should load input boxes",()=>{
 
     const InputBoxes=screen.getAllByRole("textbox");
     expect(InputBoxes.length).toBe(3);
-})    
-
+})

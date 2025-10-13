@@ -1,4 +1,4 @@
-import logos from "./logos.png";
+import logos from "../assets/images/logos.png";
 export const LOGO_IMG = logos;
 
 export const SWIGGY_MENU_BASE =

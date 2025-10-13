@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import ItemList from "./ItemList";
-import { clearCart, setIsCart } from "../assets/cartSlice";
+import ItemList from "../components/common/ItemList";
+import { clearCart, setIsCart } from "../store/slices/cartSlice";
 
 const DELIVERY_CHARGE = 40;
 const GST_PERCENT = 0.18;

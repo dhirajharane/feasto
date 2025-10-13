@@ -1,13 +1,13 @@
-import RestaurantCard, { withPromotedLabel } from "./RestaurantCard";
-import RestaurantCardsShimmer from "./Shimmer";
 import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import useOnlineStatus from "../assets/useOnlineStatus";
 import { useDispatch, useSelector } from "react-redux";
-import { addRestaurants, filterTopRated, resetFilter } from "../assets/restaurantsSlice";
-import { SWIGGY_ALL_RESTAURANTS } from "../assets/constants";
+import RestaurantCard, { withPromotedLabel } from "../components/restaurants/RestaurantCard";
+import RestaurantCardsShimmer from "../components/common/Shimmer";
+import useOnlineStatus from "../hooks/useOnlineStatus";
+import { addRestaurants, filterTopRated, resetFilter } from "../store/slices/restaurantsSlice";
+import { SWIGGY_ALL_RESTAURANTS } from "../constants/constants";
 
-const Body = () => {
+const Home = () => {
   const dispatch = useDispatch();
   const allRestaurants = useSelector((store) => store.restaurants.all);
   const filteredRestaurants = useSelector((store) => store.restaurants.filtered);
@@ -18,7 +18,6 @@ const Body = () => {
     if (allRestaurants.length === 0) {
       fetchData();
     }
-    // eslint-disable-next-line
   }, []);
 
   const fetchData = async () => {
@@ -68,4 +67,4 @@ const Body = () => {
   );
 };
 
-export default Body;
+export default Home;

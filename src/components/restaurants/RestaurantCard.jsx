@@ -1,5 +1,5 @@
 import React from "react";
-import { CDN_URL } from "../assets/constants";
+import { CDN_URL } from "../../constants/constants";
 
 const RestaurantCard = ({ resData }) => {
   const { name, cuisines, avgRating, costForTwo, cloudinaryImageId, areaName } =

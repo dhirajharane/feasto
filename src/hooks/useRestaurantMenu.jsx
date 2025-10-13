@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { SWIGGY_MENU_BASE } from "./constants";
+import { SWIGGY_MENU_BASE } from "../constants/constants";
 
 const useRestaurantMenu = (resId) => {
   const [resInfo, setResInfo] = useState(null);

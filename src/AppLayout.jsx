@@ -1,14 +1,7 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
+import Header from "./components/common/Header.jsx";
 
-// Import Header
-import Header from "./components/Header.jsx";
-
-/**
- * Main Layout Component
- * Provides the shared UI structure like Header.
- * <Outlet> renders the active nested route content.
- */
 const AppLayout = () => {
   return (
     <div className="app">

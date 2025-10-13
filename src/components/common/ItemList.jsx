@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { CDN_URL } from "../assets/constants";
 import { useDispatch, useSelector } from "react-redux";
-import { addItem, removeItem } from "../assets/cartSlice";
+import { CDN_URL } from "../../constants/constants";
+import { addItem, removeItem } from "../../store/slices/cartSlice";
 
 const ItemList = ({ items }) => {
   const isCart = useSelector((store) => store.cart.isCart);
@@ -31,7 +31,6 @@ const ItemList = ({ items }) => {
             key={item.card.info.id}
             className="flex justify-between items-start w-full md:w-10/12 bg-white p-6 mx-auto rounded-2xl border border-gray-200 shadow-md hover:shadow-lg transition-shadow text-left"
           >
-            {/* Left side: title, price, description */}
             <div className="flex flex-col space-y-2 max-w-xl">
               <span className="block sm:font-semibold font-medium text-gray-800 sm:text-lg text-sm">
                 {item.card.info.name}
@@ -48,7 +47,6 @@ const ItemList = ({ items }) => {
                 {item.card.info.description}
               </p>
             </div>
-            {/* Right side: image box */}
             <div className="relative sm:w-26 sm:h-24 w-16 h-19 flex flex-col items-center ml-4 sm:ml-0">
               <img
                 src={CDN_URL + item.card.info.imageId}

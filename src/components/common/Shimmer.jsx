@@ -1,6 +1,5 @@
 import React from "react";
 
-// For restaurant cards in Body
 export const RestaurantCardsShimmer = () => (
   <div className="flex flex-wrap justify-center mt-8">
     {Array(8)
@@ -14,7 +13,6 @@ export const RestaurantCardsShimmer = () => (
   </div>
 );
 
-// For menu page (full-width columns)
 export const ItemListShimmer = () => (
   <div className="flex flex-col gap-6 w-full md:w-8/12 mx-auto mt-8">
     {Array(5)

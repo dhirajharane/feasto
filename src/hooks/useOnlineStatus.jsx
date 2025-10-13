@@ -13,8 +13,6 @@ const useOnlineStatus=()=>{
 
     },[])
 
-
-
     return onlineStatus;
 }
 

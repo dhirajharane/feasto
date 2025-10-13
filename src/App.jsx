@@ -1,69 +1,35 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
-import { lazy, Suspense } from "react";
-import Header from "./components/Header";
-import Body from "./components/Body";
-import RestaurantCard from "./components/RestaurantCard";
-import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
-import About from "./components/About";
-import Contact from "./components/Contact";
-import Error from "./components/Error";
-import RestaurantMenu from "./components/RestaurantMenu";
-import { Provider } from "react-redux";
-import appStore from "./assets/appStore";
-import Cart from "./components/Cart";
-import "./index.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
+// Import Layout
+import AppLayout from "./AppLayout.jsx";
 
+// Import Pages
+import Body from "./components/Body.jsx";
+import About from "./components/About.jsx";
+import Contact from "./components/Contact.jsx";
+import Error from "./components/Error.jsx";
+import RestaurantMenu from "./components/RestaurantMenu.jsx";
+import Cart from "./components/Cart.jsx";
 
-// Layout component
-const AppLayout = () => {
+/**
+ * App Component with Routing
+ */
+const App = () => {
   return (
-    <Provider store={appStore}>
-      <div className="app">
-        <Header />
-        <Outlet />
-      </div>
-    </Provider>
+    <Router>
+      <Routes>
+        <Route path="/" element={<AppLayout />}>
+          <Route index element={<Body />} />
+          <Route path="about" element={<About />} />
+          <Route path="contact" element={<Contact />} />
+          <Route path="restaurants/:resId" element={<RestaurantMenu />} />
+          <Route path="cart" element={<Cart />} />
+          <Route path="*" element={<Error />} />
+        </Route>
+      </Routes>
+    </Router>
   );
 };
 
-const appRouter = createBrowserRouter([
-  {
-    path: "/",
-    element: <AppLayout />,
-    children: [
-      {
-        path: "/",
-        element: <Body />,
-      },
-
-      {
-        path: "/about",
-        element: <About />,
-      },
-
-      {
-        path: "/contact",
-        element: <Contact />,
-      },
-      
-      {
-        path: "/restaurants/:resId",
-        element: <RestaurantMenu />,
-      },
-      {
-        path: "/cart",
-        element: <Cart />,
-      },
-    ],
-    errorElement: <Error />,
-  },
-]);
-
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(
-  <React.StrictMode>
-    <RouterProvider router={appRouter} />
-  </React.StrictMode>
-);
+export default App;

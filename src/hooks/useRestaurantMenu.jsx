@@ -10,7 +10,7 @@ const useRestaurantMenu = (resId) => {
         const swiggyUrl = SWIGGY_MENU_BASE + resId;
         const proxyUrl = "/api/swiggy?url=" + encodeURIComponent(swiggyUrl);
 
-        const data = await fetch(proxyUrl);
+        const data = await fetch(swiggyUrl);
         const json = await data.json();
         setResInfo(json);
       } catch (error) {

@@ -10,9 +10,23 @@ const useRestaurantMenu = (resId) => {
         const swiggyUrl = SWIGGY_MENU_BASE + resId;
         const proxyUrl = "/api/swiggy?url=" + encodeURIComponent(swiggyUrl);
 
-        const data = await fetch(proxyUrl);
-        const json = await data.json();
-        setResInfo(json);
+        const response = await fetch(proxyUrl);
+        
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const text = await response.text();
+        
+        // Only try to parse the text if it's not empty
+        if (text) {
+          const json = JSON.parse(text);
+          setResInfo(json);
+        } else {
+          console.warn("Received empty response from the API.");
+          setResInfo(null); // Or handle as you see fit
+        }
+
       } catch (error) {
         console.error("Failed to fetch menu:", error);
         setResInfo(null);

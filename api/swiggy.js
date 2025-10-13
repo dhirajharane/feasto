@@ -4,43 +4,39 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: "Missing url parameter" });
   }
 
-  try {
-    const headers = {
-      'Accept': 'application/json, text/plain, */*',
-      'Accept-Language': 'en-US,en;q=0.9',
-      'Origin': 'https://www.swiggy.com',
-      'Referer': 'https://www.swiggy.com/',
-      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36',
-      'dnt': '1',
-      'sec-ch-ua': '"Not?A_Brand";v="8", "Chromium";v="108", "Google Chrome";v="108"',
-      'sec-ch-ua-mobile': '?0',
-      'sec-ch-ua-platform': '"Windows"',
-      'sec-fetch-dest': 'empty',
-      'sec-fetch-mode': 'cors',
-      'sec-fetch-site': 'same-origin',
-    };
+  const headers = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36',
+    'Origin': 'https://www.swiggy.com',
+    'Referer': 'https://www.swiggy.com/',
+  };
 
+  try {
     const response = await fetch(url, { headers });
+    const responseText = await response.text();
 
     if (!response.ok) {
-      const errorText = await response.text();
-      console.error(`Swiggy API Error (${response.status}): ${errorText}`);
-      return res.status(response.status).json({
+      console.error(`Swiggy API Error (${response.status}):`, responseText);
+      return res.status(502).json({
         error: "Failed to fetch from Swiggy API",
-        details: errorText,
+        details: `Upstream server returned status ${response.status}`,
+        body: responseText,
       });
     }
 
-    const data = await response.json();
-
-    res.setHeader("Access-Control-Allow-Origin", "*");
-    res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
-    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-
-    return res.status(200).json(data);
+    try {
+      const data = JSON.parse(responseText);
+      return res.status(200).json(data);
+    } catch (parseError) {
+      console.error("JSON Parsing Error:", parseError);
+      return res.status(500).json({
+        error: "Proxy error: Failed to parse JSON response from Swiggy",
+        details: parseError.message,
+        body: responseText,
+      });
+    }
 
   } catch (err) {
-    console.error("Proxy Error:", err.message);
-    return res.status(500).json({ error: "Proxy error", details: err.message });
+    console.error("Proxy Fetch Error:", err);
+    return res.status(500).json({ error: "Proxy internal error", details: err.message });
   }
 }

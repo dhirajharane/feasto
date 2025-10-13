@@ -21,12 +21,22 @@ const Home = () => {
   }, []);
 
   const fetchData = async () => {
-    const proxyUrl = "/api/swiggy?url=" + encodeURIComponent(SWIGGY_ALL_RESTAURANTS);
-    const data = await fetch(proxyUrl);
-    const json = await data.json();
-    const properData =
-      json?.data?.cards?.[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants || [];
-    dispatch(addRestaurants(properData));
+    try {
+        const proxyUrl = `/api/swiggy?url=${encodeURIComponent(SWIGGY_ALL_RESTAURANTS)}`;
+        const response = await fetch(proxyUrl);
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(`API error: ${response.status} - ${errorData.details || errorData.error}`);
+        }
+
+        const json = await response.json();
+        const properData = json?.data?.cards?.[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants || [];
+        dispatch(addRestaurants(properData));
+
+    } catch (error) {
+        console.error("Failed to fetch restaurants:", error);
+    }
   };
 
   const onlineStatus = useOnlineStatus();
@@ -34,7 +44,7 @@ const Home = () => {
     return <h3>Looks like you are offline. Please check your internet connection.</h3>;
   }
 
-  return filteredRestaurants.length === 0 ? (
+  return filteredRestaurants.length === 0 && allRestaurants.length === 0 ? (
     <RestaurantCardsShimmer />
   ) : (
     <div className="body min-h-[80vh] bg-pink-50 py-8">

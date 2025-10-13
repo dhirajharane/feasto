@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
-
-const SWIGGY_MENU_BASE =
-  "https://www.swiggy.com/dapi/menu/pl?page-type=REGULAR_MENU&complete-menu=true&lat=12.9351929&lng=77.62448069999999&restaurantId=";
+import { SWIGGY_MENU_BASE } from "../constants/constants";
 
 const useRestaurantMenu = (resId) => {
   const [resInfo, setResInfo] = useState(null);
@@ -10,14 +8,18 @@ const useRestaurantMenu = (resId) => {
     const fetchData = async () => {
       try {
         const swiggyUrl = SWIGGY_MENU_BASE + resId;
-
-        // Use a public CORS proxy
-        const proxyUrl = "https://cors-anywhere.herokuapp.com/" + swiggyUrl;
+        const proxyUrl = `/api/swiggy?url=${encodeURIComponent(swiggyUrl)}`;
 
         const response = await fetch(proxyUrl);
-        const data = await response.json();
 
-        setResInfo(data);
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(`API error: ${response.status} - ${errorData.details || errorData.error}`);
+        }
+
+        const json = await response.json();
+        setResInfo(json);
+
       } catch (error) {
         console.error("Failed to fetch menu:", error);
         setResInfo(null);

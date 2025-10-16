@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { SWIGGY_MENU_BASE } from "../constants/constants";
+import { SWIGGY_MENU_BASE, SWIGGY_PROXY_BASE } from "../constants/constants";
 
 const useRestaurantMenu = (resId) => {
   const [resInfo, setResInfo] = useState(null);
@@ -8,13 +8,15 @@ const useRestaurantMenu = (resId) => {
     const fetchData = async () => {
       try {
         const swiggyUrl = SWIGGY_MENU_BASE + resId;
-        const proxyUrl = `/api/swiggy?url=${encodeURIComponent(swiggyUrl)}`;
+        const proxyUrl = SWIGGY_PROXY_BASE + encodeURIComponent(swiggyUrl);
 
         const response = await fetch(proxyUrl);
 
         if (!response.ok) {
-          const errorData = await response.json();
-          throw new Error(`API error: ${response.status} - ${errorData.details || errorData.error}`);
+          const errorData = await response.json().catch(() => ({}));
+          throw new Error(
+            `API error: ${response.status} - ${errorData.details || errorData.error || "Unknown error"}`
+          );
         }
 
         const json = await response.json();
@@ -26,7 +28,9 @@ const useRestaurantMenu = (resId) => {
       }
     };
 
-    fetchData();
+    if (resId) {
+      fetchData();
+    }
   }, [resId]);
 
   return resInfo;

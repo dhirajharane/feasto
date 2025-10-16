@@ -23,6 +23,16 @@ export default async function handler(req, res) {
       });
     }
 
+    // Check if the responseText is not empty before parsing
+    if (!responseText) {
+      console.error("Empty response from Swiggy API");
+      return res.status(500).json({
+        error: "Proxy error: Empty response from Swiggy",
+        details: "The Swiggy API returned an empty response.",
+        body: responseText,
+      });
+    }
+
     try {
       const data = JSON.parse(responseText);
       return res.status(200).json(data);
